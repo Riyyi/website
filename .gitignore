@@ -1,0 +1,31 @@
+# Non-project
+.idea/
+.directory
+
+# Files
+*.mwb.bak
+config.php
+composer.lock
+syncconfig.sh
+
+# Directories
+/public/*
+!/public/css/
+/public/css/*
+!/public/fonts/
+!/public/img/
+/public/img/*
+!/public/js/
+/public/js/*
+!/public/media/
+/public/media/*
+/vendor/*
+
+# Unignore
+!/public/.htaccess
+!/public/css/style.css
+!/public/img/favicon.png
+!/public/index.php
+!/public/js/app.js
+!/public/js/site.js
+!/public/media/.gitinclude

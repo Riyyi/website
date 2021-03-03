@@ -1,0 +1,117 @@
+/* General */
+/*----------------------------------------*/
+
+html {
+	font-family: "Segoe UI", "DejaVu Sans", sans-serif;
+}
+
+body {
+	background-color: #f4f4f4;
+}
+
+table td.middle {
+	vertical-align: middle;
+}
+
+/* Navigation */
+/*----------------------------------------*/
+
+nav.shadow {
+	box-shadow: 0 .25rem .5rem rgba(0,0,0,.28) !important;
+}
+
+/* Main content */
+/*----------------------------------------*/
+
+.container {
+	margin: 56px auto 0 auto;
+}
+
+.content {
+	position: relative;
+	/* height: calc(100% - 56px); */
+	min-height: calc(100vh - 80px);
+	padding: 20px 20px 50px 20px;
+
+	background-color: #fff;
+}
+
+#home {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+
+	text-align: center;
+}
+
+.padding-border {
+	padding: 10px 15px 10px 15px;
+}
+
+.padding-border-col {
+	padding: 10px 15px 0px 0px;
+}
+
+.pointer {
+	cursor: pointer;
+}
+
+/* Admin content */
+/*----------------------------------------*/
+
+.admin-toggle {
+	left: auto;
+	margin: 10px 15px;
+	padding: 5px 10px;
+	border-radius: 5px;
+
+	color: #ffffff;
+}
+
+.admin-menu {
+	position: fixed;
+	top: 0;
+	right: 0;
+	padding-right: 0px;
+	z-index: 1030;
+}
+
+.admin-content {
+	min-height: 100vh;
+}
+
+.admin-hidden {
+	position: absolute;
+	top: 0;
+	left: -9999px;
+}
+
+.admin-upload-dragover {
+	background-color: rgba(0,0,0,0.1);
+}
+
+/* Cursor color in normal mode */
+.CodeMirror.cm-fat-cursor .CodeMirror-cursor {
+	background: white;
+}
+
+/* Cursor color in visual mode */
+.CodeMirror .cm-animate-fat-cursor {
+	background-color: white;
+	animation: none !important;
+}
+
+/* Footer */
+/*----------------------------------------*/
+
+footer {
+	position: absolute;
+	bottom: 0;
+	width: calc(100% - 30px);
+	height: 50px;
+	padding-top: 10px;
+
+	text-align: center;
+	color: #909090;
+}
