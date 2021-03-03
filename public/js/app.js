@@ -104,13 +104,13 @@ $(document).ready(function() {
 
 	// Enable CodeMirror Editor
 	$.fn.codeMirror = function() {
+		if (this.length === 0) return;
+
 		editor = CodeMirror.fromTextArea($(this)[0], editorOptions);
 		editor.setSize('100%', '500');
 		registerEditorCopy();
-
-		return editor;
 	}
-	$('textarea#syntax-code').codeMirror().setOption('mode', 'text/x-csrc');
+	$('textarea#syntax-code').codeMirror();
 
 	// Enable WYSIWYG Editor
 	$('textarea#summernote').summernote({
