@@ -57,6 +57,14 @@ nav.shadow {
 	cursor: pointer;
 }
 
+.anchor-link {
+	color: transparent !important;
+}
+
+.anchor-link:hover {
+	color: rgba(0,0,0,.2) !important;
+}
+
 /* Admin content */
 /*----------------------------------------*/
 
