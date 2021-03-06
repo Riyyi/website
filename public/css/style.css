@@ -57,6 +57,15 @@ nav.shadow {
 	cursor: pointer;
 }
 
+/* Anchor offset */
+h3 {
+	position: relative;
+}
+h3 span {
+	position: absolute;
+	top: -65px;
+}
+
 .anchor-link {
 	color: transparent !important;
 }
