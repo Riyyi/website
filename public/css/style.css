@@ -3,6 +3,7 @@
 
 html {
 	font-family: "Segoe UI", "DejaVu Sans", sans-serif;
+	scroll-behavior: smooth;
 }
 
 body {
