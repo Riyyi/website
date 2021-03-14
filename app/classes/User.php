@@ -19,8 +19,7 @@ class User {
 		if (!$success &&
 			_exists($_COOKIE, 'id') &&
 			_exists($_COOKIE, 'username') &&
-			_exists($_COOKIE, 'salt') &&
-			_exists($_COOKIE, 'toggle')) {
+			_exists($_COOKIE, 'salt')) {
 
 			$user = UserModel::find($_COOKIE['id']);
 
