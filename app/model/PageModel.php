@@ -67,7 +67,7 @@ class PageModel extends Model {
 		// Pull sections from cache
 		$sections = Db::getSections();
 
-		return [0 => 'Select section'] + array_combine(
+		return ['' => 'Select section'] + array_combine(
 			array_column($sections, 'id'),
 			array_column($sections, 'title')
 		);

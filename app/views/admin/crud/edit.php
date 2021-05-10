@@ -45,7 +45,7 @@
 
 	<?php } else if ($attribute[1] == 'dropdown') { ?>
 
-					<select name="<?= $name; ?>" class="custom-select">
+					<select name="<?= $name; ?>" class="custom-select" <?= $required; ?>>
 		<?php foreach($this->dropdownData[$key] as $dropdownKey => $value) { ?>
 						<option value="<?= $dropdownKey; ?>"
 							<?= $this->model->$name == $dropdownKey ? 'selected' : ''; ?>>
