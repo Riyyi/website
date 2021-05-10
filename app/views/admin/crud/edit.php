@@ -57,9 +57,10 @@
 	<?php } ?>
 				</div>
 <?php } ?>
+				<button type="submit" class="js-edit btn btn-dark" data-href="<?= $this->url . '/' . $this->model->id; ?>">Edit</button>
+
 				<input type="hidden" name="_token" value="<?= $this->csrfToken; ?>" />
 			</form>
-			<button class="js-edit btn btn-dark" href="<?= $this->url . '/' . $this->model->id; ?>">Edit</button>
 
 			<div class="pb-5"></div>
 		</div>

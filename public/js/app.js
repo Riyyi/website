@@ -25,6 +25,7 @@ $(document).ready(function() {
 
 	// Edit
 	$('.js-edit').on('click', function(event) {
+		event.preventDefault();
 
 		// Trigger HTML5 form validation
 		var valid = $('#form-edit')[0].reportValidity();
@@ -32,7 +33,7 @@ $(document).ready(function() {
 			return;
 		}
 
-		var href = $(this).attr('href');
+		var href = $(this).attr('data-href');
 		$.ajax({
 			url: href,
 			type: "PUT",
