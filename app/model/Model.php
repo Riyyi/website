@@ -222,10 +222,30 @@ abstract class Model {
 
 		// Set other attributes
 		foreach ($this->getAttributes() as $attribute) {
-			if (_exists($fill, $attribute) ||
-				(isset($fill[$attribute]) && $fill[$attribute] === '0')) {
+			if (isset($fill[$attribute])) {
 				// Escape sequences are only interpreted with double quotes!
 				$this->{$attribute} = preg_replace('/\r\n?/', "\n", $fill[$attribute]);
+			}
+		}
+
+		return true;
+	}
+
+	public function validate(): bool
+	{
+		foreach ($this->getAttributes() as $attribute) {
+
+			$required = false;
+			foreach ($this->rules as $rule) {
+				if ($rule[0] == $attribute && $rule[2] == 1) {
+					$required = true;
+					break;
+				}
+			}
+
+			// Exit if rule is marked 'required' but empty, "0" is not empty!
+			if ($required && empty($this->{$attribute}) && $this->{$attribute} !== "0") {
+				return false;
 			}
 		}
 

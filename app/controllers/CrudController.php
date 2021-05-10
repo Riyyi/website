@@ -88,7 +88,7 @@ class CrudController extends PageController {
 
 		$token = Session::validateToken($_POST);
 
-		$token && $model->fill($_POST) && $model->save()
+		$token && $model->fill($_POST) && $model->validate() && $model->save()
 			? $this->setAlertNext('success', "$modelName successfully created.")
 			: $this->setAlertNext('danger', "$modelName could not be created!");
 
@@ -171,7 +171,7 @@ class CrudController extends PageController {
 
 			$token = Session::validateToken($_PUT);
 
-			$token && $model->fill($_PUT) && $model->save()
+			$token && $model->fill($_PUT) && $model->validate() && $model->save()
 				? $this->setAlertNext('success', "$modelName successfully updated.")
 				: $this->setAlertNext('danger', "$modelName could not be updated!");
 		}
