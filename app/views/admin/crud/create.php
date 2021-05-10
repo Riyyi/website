@@ -17,7 +17,8 @@
 		$autofocus = $key == 0 ? 'autofocus' : '';
 	?>
 				<div class="form-group">
-					<label for="<?= $name; ?>"><?= $title;?></label><br>
+					<label for="<?= $name; ?>"><?= $title;?></label>
+					<?= ($required && $attribute[1] != 'checkbox') ? ' <span class="text-danger">*</span>' : ''; ?><br>
 	<?php if ($attribute[1] == 'text') { ?>
 
 					<input type="text" class="form-control"
