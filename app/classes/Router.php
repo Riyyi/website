@@ -325,6 +325,7 @@ class Router {
 			switch ($code) {
 				case 404:
 
+					// @Todo: find out why this was needed and remove if possible
 					$service->escape = function (?string $string) {
 						return htmlentities($string, ENT_QUOTES | ENT_HTML5, 'UTF-8');
 					};
