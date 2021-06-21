@@ -68,6 +68,20 @@ class IndexController extends PageController {
 		exit();
 	}
 
+    public function robotsAction(): void
+	{
+		$url = Config::c('APP_URL');
+
+		header('content-type: text/plain; charset=UTF-8');
+		echo <<< EOF
+		User-agent: *
+		Allow: /
+		Disallow: /admin
+
+		Sitemap: $url/sitemap.xml
+		EOF;
+	}
+
     public function sitemapAction(): void
 	{
 		$xml = new \SimpleXMLElement('<urlset/>');
@@ -91,7 +105,7 @@ class IndexController extends PageController {
 			$url->addChild('loc', $loc);
 		}
 
-		Header('Content-type: text/xml');
+		header('content-type: text/xml; charset=UTF-8');
 		print($xml->asXML());
 	}
 

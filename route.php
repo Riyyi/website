@@ -14,6 +14,7 @@ return [
 	// URL,                         controller,           action,     view/title/description
 	['/',                           'IndexController',    '',         ''],
 	['/img/captcha.jpg',            'IndexController',    'captcha',  ''],
+	['/robots.txt',                 'IndexController',    'robots',   ''],
 	['/sitemap.xml',                'IndexController',    'sitemap',  ''],
 	['/login',                      'LoginController',    'login',    ['', 'Sign in', '']],
 	['/reset-password',             'LoginController',    'reset',    ['', 'Reset password', '']],
