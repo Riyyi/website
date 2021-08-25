@@ -63,21 +63,41 @@ abstract class Model {
 
 	//-------------------------------------//
 
+	/**
+	 * Retreive data via PDO prepared statements
+	 *
+	 * The most frequently used constants for PDO are listed below,
+	 * find more at: {@link https://www.php.net/manual/en/pdo.constants.php}
+	 *	- PDO::PARAM_BOOL
+	 *	- PDO::PARAM_NULL
+	 *	- PDO::PARAM_INT
+	 *	- PDO::PARAM_STR
+	 *
+	 * Usage:
+	 * self::query(
+	 *     "SELECT * FROM `example` WHERE `id` = :id AND `number` = :number AND `text` = :text", [
+	 *         [':id', 1],
+	 *         [':number', 7, \PDO::PARAM_INT],
+	 *         [':text', 'A random string', \PDO::PARAM_STR],
+	 *     ]);
+	 *
+	 * self::query(
+	 *     'SELECT * FROM `example` WHERE `id` IN (?, ?, ?) AND `thing` = ?, [
+	 *         1, 2, 3, 'stuff'
+	 *     ],
+	 *     '?'
+	 * );
+	 *
+	 * @param $query The full prepared query statement
+	 * @param $parameters The values to insert into the prepared statement
+	 * @param $type Type of prepared statement, ':' for named placeholders,
+     *                                          '?' for value placeholders
+	 *
+	 * @return array|null Retreived data, or null
+	 */
 	protected static function query(string $query, array $parameters = [],
 		$type = ':'): ?array
 	{
-		// Example
-		// $parameters = [
-			// [':id', 1],
-			// [':number', 7, \PDO::PARAM_INT],
-			// [':string', 'A random string', \PDO::PARAM_STR],
-		// ];
-
-		// PDO::PARAM_BOOL
-		// PDO::PARAM_NULL
-		// PDO::PARAM_INT
-		// PDO::PARAM_STR
-
 		if (substr_count($query, $type) != count($parameters)) {
 			return null;
 		}
@@ -325,16 +345,6 @@ abstract class Model {
 		return $model;
 	}
 
-	// $media = MediaModel::selectAll(
-	// 	'*', 'ORDER BY id DESC LIMIT :offset, :limit', [
-	// 		[':offset', $offset, \PDO::PARAM_INT],
-	// 		[':limit', $limit, \PDO::PARAM_INT],
-	// 	]
-	// );
-	//
-	// $contents = ContentModel::selectAll(
-	// 	'*', 'WHERE id IN (?, ?, ?)', [1, 2, 3], '?'
-	// );
 	public static function selectAll(string $select = '*', string $filter = '',
 		array $parameters = [], $type = ':'): ?array
 	{
@@ -451,7 +461,9 @@ abstract class Model {
 
 	/**
 	 * Retreive Model, or instantiate
-	 * Usage: $model = \App\Model\Example::firstOrNew(['name' => 'Example name']);
+	 *
+	 * Usage:
+	 * $model = \App\Model\Example::firstOrNew(['name' => 'Example name']);
 	 *
 	 * @param $search Retrieve by
 	 * @param $data Instantiate with search plus data
@@ -474,7 +486,9 @@ abstract class Model {
 
 	/**
 	 * Create new Model
-	 * Usage: $model = \App\Model\Example::create(['name' => 'Example name']);
+	 *
+	 * Usage:
+	 * $model = \App\Model\Example::create(['name' => 'Example name']);
 	 *
 	 * @param $data Create with this data
 	 *
@@ -490,7 +504,9 @@ abstract class Model {
 
 	/**
 	 * Retreive Model, or create
-	 * Usage: $model = \App\Model\Example::firstOrCreate(['name' => 'Example name']);
+	 *
+	 * Usage:
+	 * $model = \App\Model\Example::firstOrCreate(['name' => 'Example name']);
 	 *
 	 * @param $search Retrieve by
 	 * @param $data Instantiate with search plus data
