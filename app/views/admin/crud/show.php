@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col-12">
 		<div class="content shadow p-4 mb-4">
-			<h3><?= _exists([$this->model->title]) ? ($this->escape)($this->model->title) : 'Show'; ?></h3>
+			<h3><?= property_exists($this->model, 'title') ? ($this->escape)($this->model->title) : 'Show'; ?></h3>
 
 			<table class="table table-bordered table-striped">
 				<thead>
