@@ -237,7 +237,7 @@ abstract class Model {
 
 			$required = false;
 			foreach ($this->rules as $rule) {
-				if ($rule[0] == $attribute && $rule[2] == 1) {
+				if ($rule[0] == $attribute && $rule[2] == 1 && $rule[3] == 0) {
 					$required = true;
 					break;
 				}
