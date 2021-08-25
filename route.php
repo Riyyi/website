@@ -21,6 +21,7 @@ return [
 	['/logout',                     'LoginController',    'logout',   ''],
 	['/admin',                      'AdminController',    '',         ''],
 	['/admin/toggle',               'AdminController',    'toggle',   ''],
+	['/admin/toggle-development-mode',  'AdminController',  'development',  ''],
 	['/admin/syntax-highlighting',  'AdminController',    'syntax',   ''],
 	['/test', 'TestController', '', ''],
 	// ["", "", "", ""],

@@ -23,6 +23,9 @@
 		- <a href="<?= \App\Classes\Config::c('APP_URL'); ?>/admin/syntax-highlighting">Syntax Highlighting</a>
 
 		<hr>
+		<h5>Development mode&nbsp;&nbsp;<button id="development-mode" class="py-0 btn btn-dark">Enable</button></h5>
+
+		<hr>
 		- <a href="<?= \App\Classes\Config::c('APP_URL'); ?>/logout">Log out</a>
 	</div>
 </div>

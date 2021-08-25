@@ -22,7 +22,7 @@
 		<link href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/themes/prism-tomorrow.min.css" rel="stylesheet" integrity="sha384-rG0ypOerdVJPawfZS6juq8t8GVE9oCCPJbOXV/bF+e61zYW9Ib6u9WwSbTOK6CKA" crossorigin="anonymous">
 		<link href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" integrity="sha384-n3/UuPVL3caytud/opHXuyFoezGp2oAUB0foYaCAIs2QwGv/nV0kULHS2WAaJuxR" crossorigin="anonymous">
 
-		<link href="<?= Config::c('APP_URL'); ?>/css/style.css?v=<?= rand(); ?>" rel="stylesheet">
+		<link href="<?= Config::c('APP_URL'); ?>/css/style.css" rel="stylesheet">
 
 		<title><?= ($this->escape)($this->pageTitle); ?><?= $this->pageTitle != '' ? ' - ' : '' ?>Rick van Vonderen</title>
 		<link rel="icon" type="image/png" href="<?= Config::c('APP_URL'); ?>/img/favicon.png">

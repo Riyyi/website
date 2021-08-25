@@ -227,6 +227,24 @@ $(document).ready(function() {
 
 	});
 
+//------------------------------------------
+
+	// Developer mode
+	$('#development-mode').on('click', function(e)
+	{
+		$.get('/admin/toggle-development-mode').done(function(data)
+		{
+			const response = JSON.parse(data);
+			if (response.success == true) {
+				alert("Development mode has been turned: " + response.result.value);
+			}
+			else {
+				alert("Development mode could not be enabled!")
+				console.log(data);
+			}
+		});
+	});
+
 });
 
 // @Todo

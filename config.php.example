@@ -14,4 +14,8 @@ return [
 	'MAIL_NAME' => '',
 	'MAIL_USERNAME' => '',
 	'MAIL_PASSWORD' => '',
+
+	'DEVELOPMENT_MODE' => '',
+	'DEVELOPMENT_MODE_TOKEN' => '',
+	'DEVELOPMENT_MODE_ZONE' => '',
 ];

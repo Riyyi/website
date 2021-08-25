@@ -23,6 +23,6 @@
 	<script src="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha384-xktrwc/DkME39VrlkNS1tFEeq/S0JFbc8J9Q8Bjx7Xy16Z3NnmUi+94RuffrOQZR" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/plugins/highlight-keywords/prism-highlight-keywords.min.js" integrity="sha384-Rk2xv6YOAfQH8z3ZAK37pgnQihXfgkER8B5EYhoFc+mMNPzf+t7g2J9U74FAvy2T" crossorigin="anonymous"></script>
 
-	<script src="<?= Config::c('APP_URL'); ?>/js/app.js?v=<?= rand(); ?>"></script>
+	<script src="<?= Config::c('APP_URL'); ?>/js/app.js"></script>
 <?php } ?>
-<script src="<?= Config::c('APP_URL'); ?>/js/site.js?v=<?= rand(); ?>"></script>
+<script src="<?= Config::c('APP_URL'); ?>/js/site.js"></script>
