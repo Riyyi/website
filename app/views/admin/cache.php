@@ -17,43 +17,43 @@ use \App\Classes\Config;
 		</div>
 		<hr>
 		<div class="row align-items-center">
-			<div class="col-9 col-md-10 col-lg-11">
+			<div class="col-9 col-md-10 col-lg-10 col-xl-10">
 				<h5>Purge CSS/JavaScript</h5>
 				<p class="mb-0">Granuarly remove .css and .js files from Cloudflare&apos;s cache.</p>
 			</div>
-			<div class="col-3 col-md-2 col-lg-1">
-				<div class="d-flex justify-content-end">
+			<div class="col-3 col-md-2 col-lg-2 col-xl-2">
+				<div class="d-flex justify-content-center">
 					<button id="" class="btn btn-dark">Purge</button>
 				</div>
 			</div>
 		</div>
 		<hr>
 		<div class="row align-items-center">
-			<div class="col-9 col-md-10 col-lg-11">
+			<div class="col-9 col-md-10 col-lg-10 col-xl-10">
 				<h5>Purge Fonts/Images</h5>
 				<p class="mb-0">Granuarly remove font and images files from Cloudflare&apos;s cache.</p>
 			</div>
-			<div class="col-3 col-md-2 col-lg-1">
-				<div class="d-flex justify-content-end">
+			<div class="col-3 col-md-2 col-lg-2 col-xl-2">
+				<div class="d-flex justify-content-center">
 					<button id="" class="btn btn-danger">Purge</button>
 				</div>
 			</div>
 		</div>
 		<hr>
 		<div class="row align-items-center">
-			<div class="col-9 col-md-10 col-lg-11">
+			<div class="col-9 col-md-10 col-lg-10 col-xl-10">
 				<h5>Purge All Files</h5>
 				<p class="mb-0">Remove ALL files from Cloudflare&apos;s cache.</p>
 			</div>
-			<div class="col-3 col-md-2 col-lg-1">
-				<div class="d-flex justify-content-end">
+			<div class="col-3 col-md-2 col-lg-2 col-xl-2">
+				<div class="d-flex justify-content-center">
 					<button id="" class="btn btn-danger">Purge</button>
 				</div>
 			</div>
 		</div>
 		<hr>
 		<div class="row align-items-center">
-			<div class="col-9 col-mlg-10 col-xl-11">
+			<div class="col-9 col-md-10 col-lg-10 col-xl-10">
 				<h5>Enable Development Mode</h5>
 				<p class="mb-0">
 					This will bypass Cloudflare&apos;s accelerated cache and slow down your site,
@@ -69,8 +69,8 @@ use \App\Classes\Config;
 					</span>
 				</p>
 			</div>
-			<div class="col-3 col-lg-2 col-xl-1">
-				<div class="d-flex justify-content-start">
+			<div class="col-3 col-md-2 col-lg-2 col-xl-2">
+				<div class="d-flex justify-content-center">
 					<input type="checkbox" id="development-mode"
 						<?= $this->config['CLOUDFLARE_DEVELOPMENT_MODE_ENABLED'] ? 'checked' : ''; ?>>
 				</div>
