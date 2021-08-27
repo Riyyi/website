@@ -15,7 +15,7 @@ return [
 	'MAIL_USERNAME' => '',
 	'MAIL_PASSWORD' => '',
 
-	'DEVELOPMENT_MODE' => '',
-	'DEVELOPMENT_MODE_TOKEN' => '',
-	'DEVELOPMENT_MODE_ZONE' => '',
+	'CLOUDFLARE_ENABLED' => '',
+	'CLOUDFLARE_TOKEN' => '',
+	'CLOUDFLARE_ZONE' => '',
 ];

@@ -232,15 +232,31 @@ $(document).ready(function() {
 	// Developer mode
 	$('#development-mode').on('click', function(e)
 	{
+		e.preventDefault();
+
+		if (!confirm('Are you sure you want to continue?')) {
+			return;
+		}
+
 		$.get('/admin/toggle-development-mode').done(function(data)
 		{
 			const response = JSON.parse(data);
 			if (response.success == true) {
-				alert("Development mode has been turned: " + response.result.value);
+				if (response.result.value == 'on') {
+					e.target.checked = true;
+					$('#develop-enabled').css('visibility', 'visible');
+					$('#develop-remaining').text('03:00:00');
+				}
+				else {
+					e.target.checked = false;
+					$('#develop-enabled').css('visibility', 'hidden');
+				}
+
+				alert("Development mode has been set to: '" + response.result.value + "'");
 			}
 			else {
-				alert("Development mode could not be enabled!")
 				console.log(data);
+				alert("Development mode could not be enabled!")
 			}
 		});
 	});
