@@ -423,14 +423,15 @@ abstract class Model {
 	}
 
 	/**
-	 * Load Model data: all, with a limit or pagination
+	 * Load all Models, optionally with a limit or pagination
 	 *
 	 * @param int $limitOrPage Treated as page if $limit is provided, limit otherwise
 	 * @param int $limit The amount to limit by
 	 *
 	 * @return array|null The found model data, or null
 	 */
-	public static function all(int $limitOrPage = -1, int $limit = -1): ?array {
+	public static function all(int $limitOrPage = -1, int $limit = -1): ?array
+	{
 		$class = get_called_class();
 		$model = new $class;
 
@@ -494,7 +495,8 @@ abstract class Model {
 	 *
 	 * @return Model The Model
 	 */
-	public static function create(array $data): Model {
+	public static function create(array $data): Model
+	{
 		$class = get_called_class();
 		$model = new $class;
 		$model->fill($data);
@@ -503,17 +505,20 @@ abstract class Model {
 	}
 
 	/**
-	 * Retreive Model, or create
+	 * Retreive Model, create if it doesn't exist
 	 *
 	 * Usage:
-	 * $model = \App\Model\Example::firstOrCreate(['name' => 'Example name']);
+	 *	$model = \App\Model\AddressModel::firstOrCreate(
+	 *		['zip_code' => '1234AB', 'house_number' => 3],
+	 *		['street' => 'Example lane']);
 	 *
 	 * @param $search Retrieve by
-	 * @param $data Instantiate with search plus data
+	 * @param $data Data used for creation
 	 *
 	 * @return Model The Model
 	 */
-	public static function firstOrCreate(array $search, array $data = []): Model {
+	public static function firstOrCreate(array $search, array $data = []): Model
+	{
 		$model = self::firstOrNew($search, $data);
 
 		if (!$model->exists()) {
@@ -523,14 +528,27 @@ abstract class Model {
 		return $model;
 	}
 
-	// // Update existing Model, or create it if doesn't exist
-	// public static function updateOrCreate(array $data, array $data): Model {
-		// // $flight = App\Flight::updateOrCreate(
-			// // ['departure' => 'Oakland', 'destination' => 'San Diego'],
-			// // ['price' => 99]
-		// // );
-		// return new Model;
-	// }
+	/**
+	 * Update Model, create if it doesn't exist
+	 *
+	 * Usage:
+	 *	$model = \App\Model\FlightModel::updateOrCreate(
+	 *		['departure' => 'Oakland', 'desination' => 'San Diego'],
+	 *		['price' => 99]);
+	 *
+	 * @param $search Retrieve by
+	 * @param $data Data used for creation
+	 *
+	 * @return Model The Model
+	 */
+	public static function updateOrCreate(array $search, array $data): Model
+	{
+		$model = self::firstOrNew($search, $data);
+		$model->fill($data);
+		$model->save();
+
+		return $model;
+	}
 
 }
 
