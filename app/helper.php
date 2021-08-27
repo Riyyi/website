@@ -51,14 +51,17 @@ function _randomStr(int $length, string $keyspace =
  * Print variable inside of a <pre> and exit
  *
  * @param mixed[] $output The variable (single/array) to print
+ * @param bool $die Call die(); after printing
  *
  * @return void Nothing
  */
-function _log($output): void {
+function _log($output, bool $die = true): void {
 	echo '<pre>';
 	var_dump($output);
 	echo '</pre>';
-	die();
+	if ($die) {
+		die();
+	}
 }
 
 //-------------------------------------//
