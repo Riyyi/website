@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Classes\Config;
+use App\Classes\Http\Http;
 use App\Model\ConfigModel;
 
 class CacheController extends PageController {
@@ -15,7 +16,7 @@ class CacheController extends PageController {
 		parent::view();
 	}
 
-	public function developmentAction(): void
+	public function toggleAction(): void
 	{
 		if (Config::c('CLOUDFLARE_ENABLED') != '1') {
 			return;
@@ -25,34 +26,24 @@ class CacheController extends PageController {
 		$zone = Config::c('CLOUDFLARE_ZONE');
 
 		$url = "https://api.cloudflare.com/client/v4/zones/$zone/settings/development_mode";
-		$headers = [
-			"Authorization: Bearer $token",
-			"Content-Type: application/json"
-		];
 
 		$config = $this->getConfigValues();
 		$currentState = $config['CLOUDFLARE_DEVELOPMENT_MODE_ENABLED'];
 
-		$newState = $currentState == '1' ? 'off' : 'on';
-		$data = '{"value": "' . $newState . '"}';
+		$response = (new Http)->withToken($token)
+							  ->asJson()
+							  ->acceptJson()
+							  ->patch($url, [
+								  'value' => $currentState == '1' ? 'off' : 'on',
+							  ]);
 
-		$curl = curl_init();
-		curl_setopt($curl, CURLOPT_URL, $url);
-		curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
-		curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
-		curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'PATCH');
-		curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-		// curl_setopt($curl, CURLINFO_HEADER_OUT, 1);
+		$this->saveConfigValues($response->body());
 
-		$response = curl_exec($curl);
-		// $info = curl_getinfo($curl, CURLINFO_HEADER_OUT);
+		echo $response->body();
 
-		curl_close($curl);
 
-		$this->saveConfigValues($response);
 
-		echo $response;
-		// echo $info;
+
 	}
 
 	//-------------------------------------//

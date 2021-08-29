@@ -238,7 +238,7 @@ $(document).ready(function() {
 			return;
 		}
 
-		$.get('/admin/toggle-development-mode').done(function(data)
+		$.get('/admin/cache/toggle').done(function(data)
 		{
 			const response = JSON.parse(data);
 			if (response.success == false) {
