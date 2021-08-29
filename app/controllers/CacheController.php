@@ -4,16 +4,79 @@ namespace App\Controllers;
 
 use App\Classes\Config;
 use App\Classes\Http\Http;
+use App\Classes\Session;
 use App\Model\ConfigModel;
 
 class CacheController extends PageController {
+
+	/**
+	 * Maximum amount of files that can be purged on a single request
+	 */
+	public static int $purgeLimit = 30;
 
 	public function cacheAction(): void
 	{
 		$config = $this->getConfigValues();
 
 		$this->router->service()->config = $config;
+		$this->router->service()->csrfToken = Session::token();
+		$this->router->service()->purgeUrl = $this->url . '/purge';
 		parent::view();
+	}
+
+	public function purgeAction(): void
+	{
+		if (!$this->validatePostRequest()) {
+			return;
+		}
+
+		$token = Config::c('CLOUDFLARE_TOKEN');
+		$zone = Config::c('CLOUDFLARE_ZONE');
+
+		$url = "https://api.cloudflare.com/client/v4/zones/$zone/purge_cache";
+
+		if (!_exists($_POST, 'type')) {
+			return;
+		}
+
+		$bodies = [];
+		switch($_POST['type']) {
+			case 'css-js':
+				$body = self::generateUrls(['css', 'js']);
+				$chunks = array_chunk($body['files'], self::$purgeLimit);
+				foreach($chunks as $chunk) {
+					$bodies[]['files'] = $chunk;
+				}
+				break;
+			case 'fonts-images':
+				$body = self::generateUrls(['fonts', 'img', 'media']);
+				$chunks = array_chunk($body['files'], self::$purgeLimit);
+				foreach($chunks as $chunk) {
+					$bodies[]['files'] = $chunk;
+				}
+				break;
+			case 'all':
+				$bodies[] = ['purge_everything' => true];
+				break;
+			default:
+				return;
+		}
+
+		$response = null;
+		foreach($bodies as $body) {
+			$response = (new Http)->withToken($token)
+								->asJson()
+								->acceptJson()
+								->post($url, $body);
+			if (empty($response->body())
+				|| !json_decode($response->body(), true)['success']) {
+				break;
+			}
+		}
+
+		if ($response) {
+			echo $response->body();
+		}
 	}
 
 	public function toggleAction(): void
@@ -40,13 +103,40 @@ class CacheController extends PageController {
 		$this->saveConfigValues($response->body());
 
 		echo $response->body();
-
-
-
-
 	}
 
 	//-------------------------------------//
+
+	private function validatePostRequest(): bool
+	{
+		if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+			parent::throw404();
+		}
+
+		if (Config::c('CLOUDFLARE_ENABLED') != '1') {
+			return false;
+		}
+
+		if (!Session::validateToken($_POST)) {
+			return false;
+		}
+
+		return true;
+	}
+
+	private static function generateUrls(array $directories): array
+	{
+		$result = [];
+
+		foreach ($directories as $directory) {
+			$files = array_diff(scandir($directory), ['..', '.']);
+			foreach ($files as $file) {
+				$result['files'][] = Config::c('APP_URL') . "/$directory/$file";
+			}
+		}
+
+		return $result;
+	}
 
 	private static function getConfigValues(): array
 	{

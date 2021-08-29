@@ -229,6 +229,40 @@ $(document).ready(function() {
 
 //------------------------------------------
 
+	$('.js-purge').on('click', function(event)
+	{
+		event.preventDefault();
+
+		const purgeType = $(this).attr('data-type');
+		const csrfToken = $(this).attr('data-token');
+
+		if (!confirm('Are you sure you want to continue?')) {
+			return;
+		}
+
+		$.ajax({
+			url: $(this).attr('href'),
+			type: 'POST',
+			data: { type: purgeType, _token: csrfToken },
+			success: function(data)
+			{
+				if (data == '') {
+					alert("Cache could not be purged!");
+					return;
+				}
+
+				const response = JSON.parse(data);
+				if (response.success == false) {
+					console.log(data);
+					alert("Cache could not be purged!");
+					return;
+				}
+
+				alert("Cache has been purged.");
+			}
+		});
+	});
+
 	// Developer mode
 	$('#development-mode').on('click', function(e)
 	{

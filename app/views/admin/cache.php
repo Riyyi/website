@@ -23,7 +23,8 @@ use \App\Classes\Config;
 			</div>
 			<div class="col-3 col-md-2 col-lg-2 col-xl-2">
 				<div class="d-flex justify-content-center">
-					<button id="" class="btn btn-dark">Purge</button>
+					<a class="js-purge btn btn-dark" href="<?= $this->purgeUrl; ?>"
+						data-type="css-js" data-token="<?= $this->csrfToken; ?>">Purge</a>
 				</div>
 			</div>
 		</div>
@@ -35,7 +36,8 @@ use \App\Classes\Config;
 			</div>
 			<div class="col-3 col-md-2 col-lg-2 col-xl-2">
 				<div class="d-flex justify-content-center">
-					<button id="" class="btn btn-danger">Purge</button>
+					<a class="js-purge btn btn-danger" href="<?= $this->purgeUrl; ?>"
+						data-type="fonts-images" data-token="<?= $this->csrfToken; ?>">Purge</a>
 				</div>
 			</div>
 		</div>
@@ -47,7 +49,8 @@ use \App\Classes\Config;
 			</div>
 			<div class="col-3 col-md-2 col-lg-2 col-xl-2">
 				<div class="d-flex justify-content-center">
-					<button id="" class="btn btn-danger">Purge</button>
+					<a class="js-purge btn btn-danger" href="<?= $this->purgeUrl; ?>"
+						data-type="all" data-token="<?= $this->csrfToken; ?>">Purge</a>
 				</div>
 			</div>
 		</div>

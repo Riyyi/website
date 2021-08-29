@@ -23,6 +23,7 @@ return [
 	['/admin',                      'AdminController',    '',         ''],
 	['/admin/cache',                'CacheController',      'cache',        ''],
 	['/admin/toggle',               'AdminController',    'toggle',   ''],
+	['/admin/cache/purge',          'CacheController',    'purge',    ''],
 	['/admin/cache/toggle',         'CacheController',    'toggle',   ''],
 	['/admin/syntax-highlighting',  'AdminController',    'syntax',   ''],
 	['/test', 'TestController', '', ''],
