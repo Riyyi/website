@@ -75,6 +75,7 @@ use \App\Classes\Config;
 			<div class="col-3 col-md-2 col-lg-2 col-xl-2">
 				<div class="d-flex justify-content-center">
 					<input type="checkbox" id="development-mode"
+						data-href="<?= $this->toggleUrl; ?>" data-token="<?= $this->csrfToken; ?>"
 						<?= $this->config['CLOUDFLARE_DEVELOPMENT_MODE_ENABLED'] ? 'checked' : ''; ?>>
 				</div>
 			</div>

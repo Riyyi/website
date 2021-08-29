@@ -21,6 +21,7 @@ class CacheController extends PageController {
 		$this->router->service()->config = $config;
 		$this->router->service()->csrfToken = Session::token();
 		$this->router->service()->purgeUrl = $this->url . '/purge';
+		$this->router->service()->toggleUrl = $this->url . '/toggle';
 		parent::view();
 	}
 
@@ -81,7 +82,7 @@ class CacheController extends PageController {
 
 	public function toggleAction(): void
 	{
-		if (Config::c('CLOUDFLARE_ENABLED') != '1') {
+		if (!$this->validatePostRequest()) {
 			return;
 		}
 

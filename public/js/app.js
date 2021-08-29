@@ -233,12 +233,12 @@ $(document).ready(function() {
 	{
 		event.preventDefault();
 
-		const purgeType = $(this).attr('data-type');
-		const csrfToken = $(this).attr('data-token');
-
 		if (!confirm('Are you sure you want to continue?')) {
 			return;
 		}
+
+		const purgeType = $(this).attr('data-type');
+		const csrfToken = $(this).attr('data-token');
 
 		$.ajax({
 			url: $(this).attr('href'),
@@ -272,26 +272,39 @@ $(document).ready(function() {
 			return;
 		}
 
-		$.get('/admin/cache/toggle').done(function(data)
-		{
-			const response = JSON.parse(data);
-			if (response.success == false) {
-				console.log(data);
-				alert("Development mode could not be enabled!");
-				return;
-			}
+		const dataHref = $(this).attr('data-href');
+		const csrfToken = $(this).attr('data-token');
 
-			if (response.result.value == 'on') {
-				e.target.checked = true;
-				$('#develop-enabled').css('visibility', 'visible');
-				$('#develop-remaining').text('03:00:00');
-			}
-			else {
-				e.target.checked = false;
-				$('#develop-enabled').css('visibility', 'hidden');
-			}
+		$.ajax({
+			url: dataHref,
+			type: 'POST',
+			data: { _token: csrfToken },
+			success: function(data)
+			{
+				if (data == '') {
+					alert("Development mode could not be enabled!");
+					return;
+				}
 
-			alert("Development mode has been set to: '" + response.result.value + "'");
+				const response = JSON.parse(data);
+				if (response.success == false) {
+					console.log(data);
+					alert("Development mode could not be enabled!");
+					return;
+				}
+
+				if (response.result.value == 'on') {
+					e.target.checked = true;
+					$('#develop-enabled').css('visibility', 'visible');
+					$('#develop-remaining').text('03:00:00');
+				}
+				else {
+					e.target.checked = false;
+					$('#develop-enabled').css('visibility', 'hidden');
+				}
+
+				alert("Development mode has been set to: '" + response.result.value + "'");
+			}
 		});
 	});
 
