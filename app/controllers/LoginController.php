@@ -151,7 +151,7 @@ class LoginController extends PageController {
 				<a href='$resetUrl'>$resetUrl</a>
 			";
 
-			if (Mail::send($subject, $message, $user->email)) {
+			if (Mail::sendMail($subject, $message, $user->email)) {
 				$this->setAlert('success', 'Successfully requested password reset.');
 			}
 			else {

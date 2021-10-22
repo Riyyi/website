@@ -42,7 +42,7 @@ class Mail {
 		return mail($to, $subject, $message, $headers);
 	}
 
-	public static function sendMail(string $subject, string $message, string $from = '', string $to = ''): bool
+	public static function sendMail(string $subject, string $message, string $to = '', string $from = ''): bool
 	{
 		if ($to == '') {
 			$to = self::$to;
