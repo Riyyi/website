@@ -43,7 +43,7 @@ class LoginController extends PageController {
 			}
 			else {
 				$user = User::getUser('', $_POST['username']);
-				if ($user->exists() && $user->failed_login_attempt >= 5) {
+				if ($user->exists() && !$user->loginAllowed()) {
 					$this->setAlert('danger', 'User has been blocked.');
 				}
 				else {

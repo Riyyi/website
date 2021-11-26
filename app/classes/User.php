@@ -41,7 +41,7 @@ class User {
 		$user = UserModel::search(['username' => $username]);
 
 		$success = false;
-		if ($user->exists() && $user->failed_login_attempt <= 2) {
+		if ($user->exists() && $user->loginAllowed()) {
 			$saltPassword = $user->salt . $password;
 			if (password_verify($saltPassword, $user->password)) {
 				$success = true;
