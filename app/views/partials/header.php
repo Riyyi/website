@@ -48,6 +48,9 @@
 			<li class="nav-item">
 				<a class="nav-link" href="https://gitlab.com/riyyi" target="_blank"><i class="fa fa-gitlab"></i> GitLab</a>
 			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="https://linkedin.com/in/rickvanvonderen" target="_blank">Linked&VeryThinSpace;<i class="fa fa-linkedin-square"></i></a>
+			</li>
 		</ul>
 
 	</div>
