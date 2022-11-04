@@ -31,6 +31,12 @@ $(document).ready(function() {
 		$("#img-hover").remove();
 	});
 
+	// Image hover on click
+	$(".js-img-hover").click(function() {
+		var url = $(this).data("img-hover");
+		window.open(url, '_blank');
+	});
+
 	// Lazy load video's
 	$(window).on('resize scroll', function() {
 		$('.js-video').each(function(index) {
