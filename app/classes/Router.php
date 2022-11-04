@@ -176,33 +176,25 @@ class Router {
 			$controller = '\App\Controllers\\' . $controller;
 			$controller = new $controller(self::$router);
 
-			$stillValid = true;
-
 			// If method does not exist in object
 			if (!method_exists($controller, $action)) {
-				$stillValid = false;
+				return $controller->throw404();
 			}
 
 			// If no valid permissions
 			if ($controller->getAdminSection() &&
 				$controller->getLoggedIn() == false) {
-				$stillValid = false;
+				return $controller->throw404();
+			}
+
+			// Loop through params
+			$params = [];
+			foreach ($param as $name) {
+				$params[] = $request->param($name);
 			}
 
 			// Call Controller action
-			if ($stillValid) {
-
-				// Loop through params
-				$params = [];
-				foreach ($param as $name) {
-					$params[] = $request->param($name);
-				}
-
-				return $controller->{$action}(...$params);
-			}
-			else {
-				$controller->throw404();
-			}
+			return $controller->{$action}(...$params);
 		});
 	}
 
@@ -227,37 +219,30 @@ class Router {
 				$route[2] .= 'Action';
 			}
 
-			$stillValid = true;
-
 			// If method does not exist in object
 			if (!method_exists($controller, $route[2])) {
-				$stillValid = false;
+				return $controller->throw404();
 			}
 
 			// If no valid permissions
 			if ($controller->getAdminSection() &&
 				$controller->getLoggedIn() == false) {
-				$stillValid = false;
+				return $controller->throw404();
 			}
 
 			// Call Controller action
-			if ($stillValid) {
-				if (is_array($route[3])) {
-					return $controller->{$route[2]}(
-						$route[3][0] ?? '',
-						$route[3][1] ?? '',
-						$route[3][2] ?? ''
-					);
-				}
-				else if ($route[3] != '') {
-					return $controller->{$route[2]}($route[3]);
-				}
-				else {
-					return $controller->{$route[2]}();
-				}
+			if (is_array($route[3])) {
+				return $controller->{$route[2]}(
+					$route[3][0] ?? '',
+					$route[3][1] ?? '',
+					$route[3][2] ?? ''
+				);
+			}
+			else if ($route[3] != '') {
+				return $controller->{$route[2]}($route[3]);
 			}
 			else {
-				$controller->throw404();
+				return $controller->{$route[2]}();
 			}
 		});
 	}
