@@ -40,15 +40,8 @@ class Router {
 
 			// Process basic routes
 			foreach (self::$routes as $route) {
-				// If route does not match the base url
-				if ($route[0] != $path) {
-					continue;
-				}
-
 				// ["/example/my-page", "ExampleController", "action", "" : ["view", "title", "description"]],
 				self::addBasicRoute(['GET', 'POST'], $route);
-
-				break;
 			}
 
 			self::createNavigation();
