@@ -9,18 +9,18 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<meta name="description" content="<?= $this->metaDescription; ?>">
 
-		<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-		<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 
 <?php if ($this->adminSection) { ?>
-		<link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.59.4/codemirror.min.css" rel="stylesheet" integrity="sha384-K/FfhVUneW5TdId1iTRDHsOHhLGHoJekcX6UThyJhMRctwRxlL3XmSnTeWX2k3Qe" crossorigin="anonymous">
-		<link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.59.4/theme/tomorrow-night-eighties.min.css" rel="stylesheet" integrity="sha384-zTCWZYMg963D68otcZCn2SQ2SBwih+lCwYxWqvx6xH8/Wt6+NN+giHIvcMpN4cPD" crossorigin="anonymous">
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.9/codemirror.min.css" rel="stylesheet" integrity="sha384-zaeBlB/vwYsDRSlFajnDd7OydJ0cWk+c2OWybl3eSUf6hW2EbhlCsQPqKr3gkznT" crossorigin="anonymous">
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.9/theme/tomorrow-night-eighties.min.css" rel="stylesheet" integrity="sha384-zTCWZYMg963D68otcZCn2SQ2SBwih+lCwYxWqvx6xH8/Wt6+NN+giHIvcMpN4cPD" crossorigin="anonymous">
 
-		<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote-bs4.min.css" rel="stylesheet" integrity="sha384-JNFvp1YkK/DsvVg1KxCYX/jfLcrqFkwUE1+4kt+Zpkhvfeetb13H+j2ZZhrTJwRy" crossorigin="anonymous">
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.20/summernote-bs4.min.css" rel="stylesheet" integrity="sha384-hqv27sxmxAI2L4eughLkUpjS75/Z3/hg9DOWIl0PJWE4B6GJqM2Kx72ZPoQzsUpF" crossorigin="anonymous">
 <?php } ?>
 
-		<link href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/themes/prism-tomorrow.min.css" rel="stylesheet" integrity="sha384-rG0ypOerdVJPawfZS6juq8t8GVE9oCCPJbOXV/bF+e61zYW9Ib6u9WwSbTOK6CKA" crossorigin="anonymous">
-		<link href="https://cdn.jsdelivr.net/npm/prismjs@1.22.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" integrity="sha384-n3/UuPVL3caytud/opHXuyFoezGp2oAUB0foYaCAIs2QwGv/nV0kULHS2WAaJuxR" crossorigin="anonymous">
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" integrity="sha384-wFjoQjtV1y5jVHbt0p35Ui8aV8GVpEZkyF99OXWqP/eNJDU93D3Ugxkoyh6Y2I4A" crossorigin="anonymous">
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" integrity="sha384-nUkTNLI8COlMCRJ0FHIdX76If83145OTCLUx4gQyfnO0gGeO/sD9czGEUBxtkcUv" crossorigin="anonymous">
 
 		<link href="<?= Config::c('APP_URL'); ?>/css/style.css" rel="stylesheet">
 
