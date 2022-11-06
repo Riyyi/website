@@ -30,8 +30,7 @@ nav.shadow {
 
 .content {
 	position: relative;
-	/* height: calc(100% - 56px); */
-	min-height: calc(100vh - 80px);
+	min-height: calc(100vh - 104px - .5rem);
 	padding: 20px 20px 50px 20px;
 
 	background-color: #fff;
@@ -124,12 +123,6 @@ h3 span {
 /*----------------------------------------*/
 
 footer {
-	position: absolute;
-	bottom: 0;
-	width: calc(100% - 30px);
-	height: 50px;
-	padding-top: 10px;
-
 	text-align: center;
 	color: #909090;
 }

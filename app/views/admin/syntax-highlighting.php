@@ -28,6 +28,4 @@
 
 	<div id="syntax-parse"><pre class="line-numbers mb-4"><code class=""></code></pre></div>
 	<textarea id="syntax-parse-copy" class="admin-hidden"></textarea>
-
-	<div class="pb-5"></div>
 </div>

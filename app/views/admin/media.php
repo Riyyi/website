@@ -84,7 +84,6 @@
 
 			<?= $this->partial('../app/views/partials/pagination.php'); ?>
 
-			<div class="pb-5"></div>
 		</div>
 	</div>
 </div>

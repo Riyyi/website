@@ -81,6 +81,4 @@ use \App\Classes\Config;
 			</div>
 		</div>
 	<?php } ?>
-
-	<div class="pb-5"></div>
 </div>

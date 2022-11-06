@@ -17,10 +17,6 @@
 		<?php if ($this->injectView != '') { ?>
 			<?= $this->partial($this->injectView); ?>
 		<?php } ?>
-
-		<?php if ($key === array_key_last($this->contents)) { ?>
-			<div class="pb-5"></div>
-		<?php } ?>
 		</div>
 
 	<?php } ?>

@@ -64,8 +64,6 @@
 					<a class="btn btn-dark" href="<?= $this->url ?>/create">New <?= $this->title; ?></a>
 				</div>
 			</div>
-
-			<div class="pb-5"></div>
 		</div>
 	</div>
 </div>

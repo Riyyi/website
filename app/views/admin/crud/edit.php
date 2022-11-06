@@ -61,8 +61,6 @@
 
 				<input type="hidden" name="_token" value="<?= $this->csrfToken; ?>" />
 			</form>
-
-			<div class="pb-5"></div>
 		</div>
 	</div>
 </div>

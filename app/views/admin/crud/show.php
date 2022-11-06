@@ -33,8 +33,6 @@
 <?php } ?>
 				</tbody>
 			</table>
-
-			<div class="pb-5"></div>
 		</div>
 	</div>
 </div>

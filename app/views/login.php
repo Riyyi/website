@@ -22,6 +22,4 @@
 	<br>
 	<a href="<?= Config::c('APP_URL'); ?>/reset-password">Forgot password</a>?
 <?php } ?>
-
-	<div class="pb-5"></div>
 </div>

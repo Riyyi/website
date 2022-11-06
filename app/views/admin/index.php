@@ -8,6 +8,4 @@
 			<?= !empty($this->user->last_name) ? ' ' . $this->user->last_name : ''; ?>
 		</h3>
 	</div>
-
-	<div class="pb-5"></div>
 </div>

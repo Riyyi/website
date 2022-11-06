@@ -9,6 +9,4 @@
 <?php } ?>
 
 	<?= $this->partial($this->injectView); ?>
-
-	<div class="pb-5"></div>
 </div>
