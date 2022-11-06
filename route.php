@@ -12,20 +12,20 @@ Router::resource('/admin/media',               'MediaController');
 
 // Basic routes
 return [
-	// URL,                         controller,           action,     view/title/description
-	['/',                           'IndexController',    '',         ''],
-	['/img/captcha.jpg',            'IndexController',    'captcha',  ''],
-	['/robots.txt',                 'IndexController',    'robots',   ''],
-	['/sitemap.xml',                'IndexController',    'sitemap',  ''],
+	// URL,                         controller,           action,     [view, title, description]
+	['/',                           'IndexController'],
+	['/img/captcha.jpg',            'IndexController',    'captcha'],
+	['/robots.txt',                 'IndexController',    'robots'],
+	['/sitemap.xml',                'IndexController',    'sitemap'],
 	['/login',                      'LoginController',    'login',    ['', 'Sign in', '']],
 	['/reset-password',             'LoginController',    'reset',    ['', 'Reset password', '']],
-	['/logout',                     'LoginController',    'logout',   ''],
-	['/admin',                      'AdminController',    '',         ''],
-	['/admin/cache',                'CacheController',      'cache',        ''],
-	['/admin/toggle',               'AdminController',    'toggle',   ''],
-	['/admin/cache/purge',          'CacheController',    'purge',    ''],
-	['/admin/cache/toggle',         'CacheController',    'toggle',   ''],
-	['/admin/syntax-highlighting',  'AdminController',    'syntax',   ''],
+	['/logout',                     'LoginController',    'logout'],
+	['/admin',                      'AdminController'],
+	['/admin/cache',                'CacheController',    'cache'],
+	['/admin/cache/purge',          'CacheController',    'purge'],
+	['/admin/cache/toggle',         'CacheController',    'toggle'],
+	['/admin/toggle',               'AdminController',    'toggle'],
+	['/admin/syntax-highlighting',  'AdminController',    'syntax'],
 	['/test', 'TestController', '', ''],
 	// ["", "", "", ""],
 ];

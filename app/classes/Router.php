@@ -41,7 +41,7 @@ class Router {
 			// Process basic routes
 			foreach (self::$routes as $route) {
 				// ["/example/my-page", "ExampleController", "action", "" : ["view", "title", "description"]],
-				self::addBasicRoute(['GET', 'POST'], $route);
+				self::addRoute(['GET', 'POST'], $route);
 			}
 
 			self::createNavigation();
@@ -74,13 +74,13 @@ class Router {
 		 * DELETE       /route/{id}         destroyAction
 		 */
 
-		self::addRoute(['GET'], [$route, $controller, 'indexAction']);
-		self::addRoute(['GET'], [$route . '/create', $controller, 'createAction']);
-		self::addRoute(['POST'], [$route, $controller, 'storeAction']);
-		self::addRoute(['GET'], [$route . '/[i:id]', $controller, 'showAction', ['id']]);
-		self::addRoute(['GET'], [$route . '/[i:id]/edit', $controller, 'editAction', ['id']]);
-		self::addRoute(['PUT', 'PATCH'], [$route . '/[i:id]', $controller, 'updateAction', ['id']]);
-		self::addRoute(['DELETE'], [$route . '/[i:id]', $controller, 'destroyAction', ['id']]);
+		self::addRoute(['GET'], [$route, $controller, 'index']);
+		self::addRoute(['GET'], [$route . '/create', $controller, 'create']);
+		self::addRoute(['POST'], [$route, $controller, 'store']);
+		self::addRoute(['GET'], [$route . '/[i:id]', $controller, 'show']);
+		self::addRoute(['GET'], [$route . '/[i:id]/edit', $controller, 'edit']);
+		self::addRoute(['PUT', 'PATCH'], [$route . '/[i:id]', $controller, 'update']);
+		self::addRoute(['DELETE'], [$route . '/[i:id]', $controller, 'destroy']);
 	}
 
 	//-------------------------------------//
@@ -139,7 +139,7 @@ class Router {
 			$url = '/' . $section[$page['section_id']] . '/' . $page['page'];
 
 			// Add route
-			self::$routes[] = [$url, 'PageController', 'route', $page['id']];
+			self::$routes[] = [$url, 'PageController', 'route', [$page['id']]];
 		}
 
 		// Cache sections and pages
@@ -149,25 +149,33 @@ class Router {
 
 	protected static function addRoute(array $method = [], array $data = []): void
 	{
-		if (!_exists($method) || !_exists($data)) {
+		if (!_exists($method) || !_exists($data) || count($data) < 2) {
 			return;
 		}
 
-		$route      = $data[0] ?? '';
-		$controller = $data[1] ?? '';
-		$action     = $data[2] ?? '';
-		$param      = $data[3] ?? [];
-		if ($route == '' || $controller == '' || $action == '') {
+		$route      = $data[0] ?? null;
+		$controller = $data[1] ?? null;
+		$action     = $data[2] ?? null;
+		$parameters = $data[3] ?? [];
+
+		if (!$route || !$controller || !is_array($parameters)) {
 			return;
 		}
 
 		// Create Klein route
-		self::$router->respond($method, $route, function($request, $response, $service)
-			use($controller, $action, $param) {
+		self::$router->respond($method, $route, function($request, $response, $service) use($controller, $action, $parameters) {
 
 			// Create new Controller object
 			$controller = '\App\Controllers\\' . $controller;
 			$controller = new $controller(self::$router);
+
+			// Complete action variable
+			if (!$action) {
+				$action = 'indexAction';
+			}
+			else {
+				$action .= 'Action';
+			}
 
 			// If method does not exist in object
 			if (!method_exists($controller, $action)) {
@@ -175,68 +183,19 @@ class Router {
 			}
 
 			// If no valid permissions
-			if ($controller->getAdminSection() &&
-				$controller->getLoggedIn() == false) {
+			if ($controller->getAdminSection() && !$controller->getLoggedIn()) {
 				return $controller->throw404();
 			}
 
-			// Loop through params
-			$params = [];
-			foreach ($param as $name) {
-				$params[] = $request->param($name);
-			}
+			// Get URL parameters
+			$namedParameters = array_filter($request->paramsNamed()->all(), 'is_string', ARRAY_FILTER_USE_KEY);
+			$namedParameters = array_values($namedParameters);
+
+			// Append URL parameters to the hard-coded parameters
+			array_push($parameters, ...$namedParameters);
 
 			// Call Controller action
-			return $controller->{$action}(...$params);
-		});
-	}
-
-	protected static function addBasicRoute(array $method = [], array $route = []): void
-	{
-		if (!_exists($method) || !_exists($route)) {
-			return;
-		}
-
-		// Create Klein route
-		self::$router->respond($method, $route[0], function() use($route) {
-
-			// Create new Controller object
-			$controller = '\App\Controllers\\' . $route[1];
-			$controller = new $controller(self::$router);
-
-			// Complete action variable
-			if ($route[2] == '') {
-				$route[2] = 'indexAction';
-			}
-			else {
-				$route[2] .= 'Action';
-			}
-
-			// If method does not exist in object
-			if (!method_exists($controller, $route[2])) {
-				return $controller->throw404();
-			}
-
-			// If no valid permissions
-			if ($controller->getAdminSection() &&
-				$controller->getLoggedIn() == false) {
-				return $controller->throw404();
-			}
-
-			// Call Controller action
-			if (is_array($route[3])) {
-				return $controller->{$route[2]}(
-					$route[3][0] ?? '',
-					$route[3][1] ?? '',
-					$route[3][2] ?? ''
-				);
-			}
-			else if ($route[3] != '') {
-				return $controller->{$route[2]}($route[3]);
-			}
-			else {
-				return $controller->{$route[2]}();
-			}
+			return $controller->{$action}(...$parameters);
 		});
 	}
 
@@ -326,6 +285,3 @@ class Router {
 }
 
 Router::_init();
-
-// @Todo
-// - combine addRoute and addBasicroute functionality
