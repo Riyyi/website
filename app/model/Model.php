@@ -98,7 +98,7 @@ abstract class Model {
 	protected static function query(string $query, array $parameters = [],
 		$type = ':'): ?array
 	{
-		if (substr_count($query, $type) != count($parameters)) {
+		if ($type == '?' && substr_count($query, $type) != count($parameters)) {
 			return null;
 		}
 
