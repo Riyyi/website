@@ -13,6 +13,39 @@ $(document).ready(function() {
 	}
 
 	//------------------------------------------//
+	// Blog search
+
+	function blogSearch(input)
+	{
+		var url = input.data("url");
+		var search = input.val();
+		window.location.href = url + '?search=' + search;
+	}
+
+	$("#js-blog-search").keydown(function(e) {
+		if (e.key == 'Enter') {
+			e.preventDefault();
+			blogSearch($(this));
+		}
+	});
+
+	$("#js-blog-search-button").click(function() {
+		blogSearch($("#js-blog-search"));
+	});
+
+	$("#js-blog-search").on("input", function() {
+		var url = $(this).data("url");
+		var search = $(this).val();
+		if (search.length == 0 || search.length >= 3) {
+			fetch(url + '/search?query=' + search)
+				.then(response => response.text())
+				.then(data => {
+					$("#blog-posts").empty().append(data);
+				});
+		}
+	});
+
+	//------------------------------------------//
 
 	// Image hover mouseenter
 	$(".js-img-hover").mouseenter(function(event) {

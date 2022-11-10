@@ -1,6 +1,5 @@
 <?php
-
-use \App\Classes\Config;
+	use \App\Classes\Config;
 ?>
 <div class="content shadow p-4 mb-4">
 	<h3 class="mb-4">Cache</h3>

@@ -17,6 +17,8 @@ return [
 	['/img/captcha.jpg',            'IndexController',    'captcha'],
 	['/robots.txt',                 'IndexController',    'robots'],
 	['/sitemap.xml',                'IndexController',    'sitemap'],
+	['/blog',                       'BlogController'],
+	['/blog/search',                'BlogController', 'search'],
 	['/login',                      'LoginController',    'login',    ['', 'Sign in', '']],
 	['/reset-password',             'LoginController',    'reset',    ['', 'Reset password', '']],
 	['/logout',                     'LoginController',    'logout'],
