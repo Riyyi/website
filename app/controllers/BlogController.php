@@ -41,7 +41,9 @@ class BlogController extends PageController {
 				LEFT JOIN section ON page.section_id = section.id
 				LEFT JOIN log ON blog_post.log_id = log.id
 				WHERE blog_post.archived = 0 AND
-				(blog_post.title LIKE :query OR blog_post.tag LIKE :query)
+				(blog_post.content LIKE :query OR
+				 blog_post.title LIKE :query OR
+				 blog_post.tag LIKE :query)
 			', [[':query', "%$query%", \PDO::PARAM_STR]]);
 	}
 
