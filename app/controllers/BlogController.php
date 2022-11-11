@@ -8,8 +8,9 @@ class BlogController extends PageController {
 
 	public function indexAction(): void
 	{
+		$archived = $this->router->request()->param('archived', 0);
 		$query = $this->router->request()->param('search', '');
-		$posts = $this->search($query);
+		$posts = $this->search($query, $archived);
 
 		$this->defineHelpers();
 
@@ -21,8 +22,9 @@ class BlogController extends PageController {
 
 	public function searchAction(): void
 	{
+		$archived = $this->router->request()->param('archived', 0);
 		$query = $this->router->request()->param('query', '');
-		$posts = $this->search($query);
+		$posts = $this->search($query, $archived);
 
 		$this->defineHelpers();
 
@@ -32,7 +34,7 @@ class BlogController extends PageController {
 
 	//-------------------------------------//
 
-	private function search(string $query): ?array
+	private function search(string $query = '', int $archived = 0): ?array
 	{
 		return BlogModel::selectAll(
 			'blog_post.*, media.filename, media.extension, page.page, section.section, log.created_at', '
@@ -40,11 +42,14 @@ class BlogController extends PageController {
 				LEFT JOIN page ON blog_post.page_id = page.id
 				LEFT JOIN section ON page.section_id = section.id
 				LEFT JOIN log ON blog_post.log_id = log.id
-				WHERE blog_post.archived = 0 AND
+				WHERE blog_post.archived = :archived AND
 				(blog_post.content LIKE :query OR
 				 blog_post.title LIKE :query OR
 				 blog_post.tag LIKE :query)
-			', [[':query', "%$query%", \PDO::PARAM_STR]]);
+			', [
+				[':archived', "$archived", \PDO::PARAM_INT],
+				[':query', "%$query%", \PDO::PARAM_STR]
+			]);
 	}
 
 	private function defineHelpers(): void
