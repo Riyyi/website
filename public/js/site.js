@@ -37,7 +37,13 @@ $(document).ready(function() {
 		var url = $(this).data("url");
 		var search = $(this).val();
 		if (search.length == 0 || search.length >= 3) {
-			fetch(url + '/search?query=' + encodeURIComponent(search))
+			fetch(url, {
+				method: 'POST',
+				body: 'search=' + encodeURIComponent(search),
+				headers: {
+					'Content-Type': 'application/x-www-form-urlencoded',
+				}
+			})
 				.then(response => response.text())
 				.then(data => {
 					$("#blog-posts").empty().append(data);

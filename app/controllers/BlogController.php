@@ -9,27 +9,21 @@ class BlogController extends PageController {
 	public function indexAction(): void
 	{
 		$archived = $this->router->request()->param('archived', 0);
-		$query = $this->router->request()->param('search', '');
-		$posts = $this->search($query, $archived);
+		$search = $this->router->request()->param('search', '');
+		$posts = $this->search($search, $archived);
 
 		$this->defineHelpers();
 
-		$this->router->service()->search = $query;
+		// AJAX search request will only render the posts partial
+		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+			$this->router->service()->partial($this->views . '/partials/blog-posts.php', ['posts' => $posts]);
+			return;
+		}
+
 		$this->router->service()->posts = $posts;
+		$this->router->service()->search = $search;
 		$this->router->service()->injectView = $this->views . '/partials/blog-posts.php';
 		parent::view('blog', 'Hello');
-	}
-
-	public function searchAction(): void
-	{
-		$archived = $this->router->request()->param('archived', 0);
-		$query = $this->router->request()->param('query', '');
-		$posts = $this->search($query, $archived);
-
-		$this->defineHelpers();
-
-		$this->router->service()->posts = $posts;
-		$this->router->service()->partial($this->views . '/partials/blog-posts.php', $posts);
 	}
 
 	//-------------------------------------//
