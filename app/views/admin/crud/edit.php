@@ -48,6 +48,7 @@
 					<select name="<?= $name; ?>" class="custom-select" <?= $required; ?>>
 		<?php foreach($this->dropdownData[$key] as $dropdownKey => $value) { ?>
 						<option value="<?= $dropdownKey; ?>"
+							<?= ($dropdownKey == 0) ? 'disabled' : ''; ?>
 							<?= $this->model->$name == $dropdownKey ? 'selected' : ''; ?>>
 							<?= $value; ?>
 						</option>

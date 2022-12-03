@@ -45,7 +45,10 @@
 
 					<select name="<?= $name; ?>" class="custom-select" <?= $required; ?>>
 		<?php foreach($this->dropdownData[$key] as $dropdownKey => $value) { ?>
-						<option value="<?= $dropdownKey; ?>"><?= $value; ?></option>
+						<option value="<?= $dropdownKey; ?>"
+							<?= ($dropdownKey == 0) ? 'disabled selected' : ''; ?>>
+							<?= $value; ?>
+						</option>
 		<?php } ?>
 					</select>
 
