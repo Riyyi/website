@@ -15,13 +15,7 @@
 						</p>
 	<?php if (_exists($post, 'tag')) { ?>
 						<small>
-							<i>
-								tags:
-		<?php $tags = ($this->tags)($post['tag']); ?>
-		<?php foreach ($tags as $key => $tag) { ?>
-			<?= $tag . (($key === array_key_last($tags)) ? '' : ', '); ?>
-		<?php } ?>
-							</i>
+							<i>tags: <?= ($this->tags)($post['tag']); ?></i>
 						</small>
 						<div class="d-md-none mb-3"></div>
 	<?php } ?>

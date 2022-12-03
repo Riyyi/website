@@ -54,9 +54,20 @@ class BlogController extends PageController {
 			return "<u class=\"text-decoration-none text-reset\" title=\"{$timestamp}\">{$date}</u>";
 		};
 
-		$this->router->service()->tags = function (string $tags): array {
+		$this->router->service()->tags = function (string $tags): string {
+			$result = "";
+
 			// Remove empty elements via array_filter()
-			return array_filter(explode(':', $tags));
+			$splitTags = array_filter(explode(':', $tags), function ($tag) {
+				return !empty(trim($tag));
+			});
+
+			foreach ($splitTags as $key => $tag) {
+				$result .= $tag;
+				$result .= (($key === array_key_last($splitTags)) ? '' : ', ');
+			}
+
+			return $result;
 		};
 	}
 
