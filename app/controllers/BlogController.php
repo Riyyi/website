@@ -2,11 +2,12 @@
 
 namespace App\Controllers;
 
+use App\Classes\Config;
 use App\Model\BlogModel;
 
 class BlogController extends PageController {
 
-	public function indexAction(): void
+	public function searchAction(): void
 	{
 		$archived = $this->router->request()->param('archived', 0);
 		$search = $this->router->request()->param('search', '');
@@ -23,7 +24,43 @@ class BlogController extends PageController {
 		$this->router->service()->posts = $posts;
 		$this->router->service()->search = $search;
 		$this->router->service()->injectView = $this->views . '/partials/blog-posts.php';
-		parent::view('blog', 'Hello');
+		parent::view('blog', 'Blog');
+	}
+
+	public function rssAction(): void
+	{
+		date_default_timezone_set('Europe/Amsterdam');
+
+		$xml = new \SimpleXMLElement('<rss version="2.0"/>');
+		$channel = $xml->addChild('channel');
+		$channel->addChild('title', 'Rick&apos;s Webpage');
+		$channel->addChild('link', Config::c('APP_URL'));
+		$channel->addChild('description', 'Recent content on Rick&apos;s Webpage.');
+		$channel->addChild('language', 'en-us');
+		$channel->addChild('lastBuildDate', date('D, d M Y H:i:s O'));
+
+		// Fetch all non-archived blog posts
+		$search = $this->router->request()->param('search', '');
+		$posts = $this->search($search, 0);
+
+		foreach ($posts as $post) {
+			$link = Config::c('APP_URL') . '/' . $post['section'] . '/' . $post['page'];
+			$date = (new \DateTime($post['created_at']))->format('D, d M Y H:i:s O');
+
+			$item = $channel->addChild('item');
+			$item->addChild('title', $post['title']);
+			$item->addChild('link', $link);
+			$item->addChild('description', $post['content']);
+			$item->addChild('pubDate', $date);
+			$item->addChild('guid', $link);
+		}
+
+		header('content-type: text/xml; charset=UTF-8');
+		$dom = new \DOMDocument("1.0");
+		$dom->preserveWhiteSpace = false;
+		$dom->formatOutput = true;
+		$dom->loadXML($xml->asXML());
+		print $dom->saveXML();
 	}
 
 	//-------------------------------------//
